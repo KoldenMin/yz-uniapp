@@ -1,9 +1,9 @@
 <template>
   <view class="app-layout">
-    <Navbar/>
     <view class="main-content">
-      <slot></slot>
+      <router-view/>
     </view>
+    <Navbar/>
   </view>
 </template>
 

@@ -13,7 +13,10 @@
     <view class="card-row">
       <uni-card class="info-card" title="个人信息概览">
         <template v-slot:cover>
-          <text class="card-link" @click="goToProfile">查看详情</text>
+          <view class="card-actions">
+            <text class="card-link" @click="goToProfile">查看详情</text>
+            <text class="card-link logout-link" @click="showLogoutConfirm">退出登录</text>
+          </view>
         </template>
         <view v-if="userInfo" class="info-overview">
           <view class="info-item">
@@ -105,15 +108,50 @@ const formatDate = (dateStr) => {
 };
 
 const goToProfile = () => {
-  uni.navigateTo({
+  uni.switchTab({
     url: '/pages/users/Profile'
   });
 };
 
 const goToUserList = () => {
-  uni.navigateTo({
+  uni.switchTab({
     url: '/pages/users/UserList'
   });
+};
+
+// 显示退出登录确认对话框
+const showLogoutConfirm = () => {
+  uni.showModal({
+    title: '退出登录',
+    content: '确定要退出登录吗？',
+    confirmColor: '#ff0000',
+    success: (res) => {
+      if (res.confirm) {
+        logout();
+      }
+    }
+  });
+};
+
+// 退出登录
+const logout = async () => {
+  try {
+    await userStore.logoutAction();
+    // 退出成功后跳转到登录页
+    uni.reLaunch({
+      url: '/pages/login/login'
+    });
+    uni.showToast({
+      title: '已安全退出',
+      icon: 'success'
+    });
+  } catch (error) {
+    console.error('退出登录失败:', error);
+    uni.showToast({
+      title: '退出失败，请重试',
+      icon: 'none'
+    });
+  }
 };
 
 // 更新当前时间
@@ -141,6 +179,8 @@ onBeforeUnmount(() => {
   padding: 20rpx;
   background-color: #f5f7fa;
   min-height: 100vh;
+  padding-bottom: 120rpx; /* 为底部工具栏留出空间 */
+  position: relative;
 }
 
 .welcome-card {
@@ -184,9 +224,19 @@ onBeforeUnmount(() => {
   border-radius: 8rpx;
 }
 
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .card-link {
   color: #409EFF;
   font-size: 28rpx;
+}
+
+.logout-link {
+  color: #F56C6C;
 }
 
 .info-overview, .edu-overview {
@@ -285,6 +335,36 @@ onBeforeUnmount(() => {
   color: #606266;
 }
 
+/* 底部工具栏样式 */
+.bottom-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20rpx;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F56C6C;
+  color: #fff;
+  border-radius: 8rpx;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.logout-button text {
+  margin-left: 10rpx;
+}
+
 /* 媒体查询适配大屏 */
 @media screen and (min-width: 768px) {
   .card-row {
@@ -302,6 +382,15 @@ onBeforeUnmount(() => {
 
   .admin-card {
     width: 100%;
+  }
+
+  .bottom-toolbar {
+    padding: 20rpx 40rpx;
+  }
+
+  .logout-button {
+    width: auto;
+    margin: 0 auto;
   }
 }
 </style>

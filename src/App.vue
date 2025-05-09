@@ -22,9 +22,6 @@ export default {
   },
 }
 </script>
-<template>
-  <Navbar></Navbar>
-</template>
 
 <style>
 /*每个页面公共css */

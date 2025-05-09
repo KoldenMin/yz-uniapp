@@ -36,6 +36,69 @@
         "navigationBarTitleText": "用户列表",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/employee/index",
+      "style": {
+        "navigationBarTitleText": "人员信息管理",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/project/index",
+      "style": {
+        "navigationBarTitleText": "项目信息管理",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/employee/approve",
+      "style": {
+        "navigationBarTitleText": "审核列表",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/employee/department",
+      "style": {
+        "navigationBarTitleText": "部门列表",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/employee/employee",
+      "style": {
+        "navigationBarTitleText": "员工列表",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/project/project",
+      "style": {
+        "navigationBarTitleText": "项目列表",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/project/projectParticipant",
+      "style": {
+        "navigationBarTitleText": "项目参与",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/project/projectTest",
+      "style": {
+        "navigationBarTitleText": "项目测试用例",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/project/projectBug",
+      "style": {
+        "navigationBarTitleText": "bug列表",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "globalStyle": {
@@ -67,12 +130,21 @@
         "iconPath": "static/images/userlist.png",
         "selectedIconPath": "static/images/userlist-active.png",
         "text": "用户列表"
+      },
+      {
+        "pagePath": "pages/employee/index",
+        "iconPath": "static/images/tabbar/staff.png",
+        "selectedIconPath": "static/images/tabbar/staff-active.png",
+        "text": "人员信息管理"
+      },
+      {
+        "pagePath": "pages/project/index",
+        "iconPath": "static/images/tabbar/project.png",
+        "selectedIconPath": "static/images/tabbar/project-active.png",
+        "text": "项目信息管理"
       }
     ]
   },
-//  "tabBar": {
-//    "custom": true
-//  },
   "easycom": {
     "autoscan": true,
     "custom": {
